@@ -58,3 +58,17 @@ it("should return 404 on PUT /products", async () => {
     .send({ name: "updated name", description: "updated description" });
   expect(res.statusCode).toBe(404);
 });
+
+it("DELETE /products", async () => {
+  const res = await request(app)
+    .delete("/products/" + firstProduct._id)
+    .send();
+  expect(res.statusCode).toBe(200);
+});
+
+it("DELETE id doesn't exist /products/:productId", async () => {
+  const res = await request(app)
+    .delete("/products/" + firstProduct._id)
+    .send();
+  expect(res.statusCode).toBe(404);
+});
